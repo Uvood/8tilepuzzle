@@ -81,7 +81,8 @@ void Move(nodo atual, char opc)
 int main()
 {
     int idCount = 0;//cria um id inicial
-    nodo inicial = CriaInicial(idCount);//cria o inicial
+    int initialState[9] = {0,1,2,3,4,5,6,7,8};
+    nodo inicial = CriaInicial(idCount,initialState);//cria o inicial
     idCount++;
 
     char opc = '\0';//var q recebe a opção digitada no teclado

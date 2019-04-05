@@ -8,22 +8,12 @@
 #include <stdlib.h>
 #include "nodo.h"
 
-nodo CriaInicial(int id, int state)
+nodo CriaInicial(int id, int state[9])
 {
     nodo ini = (nodo) malloc(sizeof(struct Nodo));
     if(ini != NULL)
     {
         ini->id = id;
-//        ini->estado[0] = 7;
-//	ini->estado[1] = 2;
-//	ini->estado[2] = 5;
-//	ini->estado[3] = 4;
-//	ini->estado[4] = 0;
-//	ini->estado[5] = 6;
-//	ini->estado[6] = 8;
-//	ini->estado[7] = 3;
-//	ini->estado[8] = 1;
-
         memcpy(ini->estado, state, sizeof(int) * 9);//copia pai pro filho
         
                 
