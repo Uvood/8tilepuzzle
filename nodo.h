@@ -26,7 +26,7 @@ struct Nodo
 };
 
 
-nodo CriaInicial(int id);
+nodo CriaInicial(int id, int state[9]);
 nodo CriaNodoFilho(nodo pai, int pos, int posAux);//p1 e p2 devem trocar de posição
 
 #endif /* NODO_H */
