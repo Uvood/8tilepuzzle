@@ -6,7 +6,7 @@
 //mostra o menu e o puzzle
 void MostraMenu(nodo atual)
 {
-    system("clear");
+    //system("clear");
     printf("\n\t%d %d %d\n", atual->estado[0], atual->estado[1], atual->estado[2]);
     printf("\t%d %d %d\n", atual->estado[3], atual->estado[4], atual->estado[5]);
     printf("\t%d %d %d\n\n", atual->estado[6], atual->estado[7], atual->estado[8]);
@@ -26,13 +26,14 @@ int VerificaPosicaoBlank(nodo atual)
         if (atual->estado[i] == 0)
         {
             return i;
+            printf("----------------------i: %d\n", i);
         }
     }
     return -1;
 }
 
 //verificação posição do blank, depois verifica intenção de movimento, e se possivel cria uma copia do filho com o movimento
-void Move(nodo atual, char opc)
+nodo Move(nodo atual, char opc)
 {
     int pos = VerificaPosicaoBlank(atual);
     int posAux;
@@ -41,7 +42,7 @@ void Move(nodo atual, char opc)
         if (pos >= 3)//se é maior que 2 pode mover para cima
         {
             posAux = pos - 3;
-            CriaNodoFilho(atual, pos, posAux);
+            atual = CriaNodoFilho(atual, pos, posAux);
         }
         else
             printf("movimento para cima não permitido.");
@@ -50,8 +51,8 @@ void Move(nodo atual, char opc)
     {
         if (pos % 3 != 0)//se o resto de divisão por 3 é zero então está na lateral esquerda
         {
-                posAux = pos - 1;
-                CriaNodoFilho(atual, pos, posAux);
+            posAux = pos - 1;
+            atual = CriaNodoFilho(atual, pos, posAux);
         }
         else
             printf("movimento para esquerda não permitido.");
@@ -61,7 +62,7 @@ void Move(nodo atual, char opc)
         if (pos % 3 != 2)//se o resto de divisão por 3 é 2 então está na lateral direita
         {
             posAux = pos + 1;
-            CriaNodoFilho(atual, pos, posAux);
+            atual = CriaNodoFilho(atual, pos, posAux);
         }
         else
             printf("movimento para direita não permitido.");
@@ -71,30 +72,29 @@ void Move(nodo atual, char opc)
         if (pos <= 5)//se é menor que 6 pode mover pra baixo
         {
             posAux = pos + 3;
-            CriaNodoFilho(atual, pos, posAux);
+            atual = CriaNodoFilho(atual, pos, posAux);
         }
         else
             printf("movimento para baixo não permitido.");
     }
+    return atual;
 }
 
 int main()
 {
     int idCount = 0;//cria um id inicial
-    int initialState[9] = {0,1,2,3,4,5,6,7,8};
-    nodo inicial = CriaInicial(idCount,initialState);//cria o inicial
+    int initialState[9] = {1,0,2,3,4,5,6,7,8}; //Estado inicial
+    
+    nodo atual = CriaInicial(idCount,initialState);//cria o inicial
     idCount++;
 
     char opc = '\0';//var q recebe a opção digitada no teclado
     while (opc != '0')
     {
-        MostraMenu(inicial);
+        MostraMenu(atual);
 
-        //scanf("%c", &opc);
         scanf("%c", &opc);
-        //printf("Voce digitou: %d, %c\n", opc, opc);
-
-        Move(inicial, opc);
+        atual = Move(atual, opc);
 
         getchar();
     }

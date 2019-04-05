@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "nodo.h"
 
 nodo CriaInicial(int id, int state[9])
@@ -16,6 +17,10 @@ nodo CriaInicial(int id, int state[9])
         ini->id = id;
         memcpy(ini->estado, state, sizeof(int) * 9);//copia pai pro filho
         
+        ini->filhos[0] = NULL;
+        ini->filhos[1] = NULL;
+        ini->filhos[2] = NULL;
+        ini->filhos[3] = NULL;
                 
         return ini;
     }
@@ -26,20 +31,20 @@ nodo CriaInicial(int id, int state[9])
 //cria nodo do tipo filho, copia, e troca as posições
 nodo CriaNodoFilho(nodo pai, int pos, int posAux)//p1 e p2 devem trocar de posição
 {
-	nodo novo;
-	if (!(novo = (nodo) malloc(sizeof(struct Nodo)))) return NULL;
-
+	nodo novo = (nodo) malloc(sizeof(struct Nodo));
+	//if (!(novo = (nodo) malloc(sizeof(struct Nodo)))) return NULL;
+        
 	novo->id = 5;//***********
-	novo->pai = pai;
-	
+	novo->pai = pai;    
+        
 	//adiciona filho na lista do pai*********
 	
-	memcpy(pai->estado, novo->estado, sizeof(int) * 9);//copia pai pro filho
+	memcpy(novo->estado, pai->estado, sizeof(int) * 9);//copia pai pro filho
 
 	//troca posições
-	int aux = novo->estado[pos];
+	int aux = novo->estado[pos]; 
 	novo->estado[pos] = novo->estado[posAux];
 	novo->estado[posAux] = aux;
-
+    
 	return novo;
 }
