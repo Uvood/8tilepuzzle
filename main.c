@@ -26,7 +26,6 @@ int VerificaPosicaoBlank(nodo atual)
         if (atual->estado[i] == 0)
         {
             return i;
-            printf("----------------------i: %d\n", i);
         }
     }
     return -1;
