@@ -16,13 +16,20 @@
 
 
 typedef struct Nodo *nodo;
+typedef struct Lista *lista;
 
 struct Nodo
 {
     int id;
     int estado[9];
     nodo pai;
-    nodo filhos[4];
+    lista filhos;
+};
+
+struct Lista
+{
+    nodo n;
+    lista prox; 
 };
 
 

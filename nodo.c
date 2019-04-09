@@ -17,14 +17,11 @@ nodo CriaInicial(int id, int state[9])
         ini->id = id;
         memcpy(ini->estado, state, sizeof(int) * 9);//copia pai pro filho
         
-        ini->filhos[0] = NULL;
-        ini->filhos[1] = NULL;
-        ini->filhos[2] = NULL;
-        ini->filhos[3] = NULL;
+        ini->filhos = NULL;
                 
         return ini;
     }
-    
+    //Se nao criar o nodo
     exit(EXIT_FAILURE);
 }
 
@@ -36,15 +33,32 @@ nodo CriaNodoFilho(nodo pai, int pos, int posAux)//p1 e p2 devem trocar de posi�
         
 	novo->id = 5;//***********
 	novo->pai = pai;    
-        
-	//adiciona filho na lista do pai*********
-	
+ 
 	memcpy(novo->estado, pai->estado, sizeof(int) * 9);//copia pai pro filho
 
 	//troca posições
 	int aux = novo->estado[pos]; 
 	novo->estado[pos] = novo->estado[posAux];
 	novo->estado[posAux] = aux;
-    
+        
+        lista filho = (lista) malloc(sizeof(struct Lista));
+	filho->n = novo;
+        filho->prox = NULL;
+        
+        if (pai->filhos == NULL) //Primeiro filho
+        {
+            pai->filhos = aux;
+        }
+        else
+        {
+            lista aux = pai->filhos;
+            while(aux->prox != NULL)
+            {
+                aux = aux->prox;
+            }
+            aux->prox = filho;
+        }
+        
+
 	return novo;
 }
