@@ -35,6 +35,7 @@ struct Lista
 
 nodo CriaInicial(int id, int state[9]);
 nodo CriaNodoFilho(nodo pai, int pos, int posAux);//p1 e p2 devem trocar de posição
+int isGoal(nodo n);//Verifica se e o estado objetivo
 
 #endif /* NODO_H */
 

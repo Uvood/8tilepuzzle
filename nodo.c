@@ -9,7 +9,7 @@
 #include <string.h>
 #include "nodo.h"
 
-nodo CriaInicial(int id, int state[9])
+nodo CriaInicial(int state[9])
 {
     nodo ini = (nodo) malloc(sizeof(struct Nodo));
     if(ini != NULL)
@@ -61,4 +61,20 @@ nodo CriaNodoFilho(nodo pai, int pos, int posAux)//p1 e p2 devem trocar de posi√
         
 
 	return novo;
+}
+
+
+int isGoal(nodo n)
+{
+    
+    int goal[9] = {1,2,3,4,5,6,7,8,0};
+    
+    for(int i=0; i<9; i++)
+    {
+        if (n->estado[i] != goal[i])
+        {
+            return 0;
+        }
+    }
+    return 1;
 }
